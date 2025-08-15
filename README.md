@@ -59,6 +59,9 @@ AppBar color adapts to current weather.
 Default color is blue if no weather is loaded.
 
 📸 Screenshots
+
+
+
 <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/42395780-5697-4c29-b1ac-fbc85a49955c" />
 
 <img width="576" height="1280" alt="image" src="https://github.com/user-attachments/assets/4a72bfce-2ca1-4deb-b921-fff601c1e483" />
