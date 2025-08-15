@@ -26,30 +26,6 @@ A simple and clean weather application built with **Flutter** using **BLoC** sta
 
 ---
 
-## 📂 Project Structure
-lib/
-│
-├── cubits/
-│ └── get_weather_cubit/ # Cubit + States for weather fetching
-│
-├── models/
-│ └── weather_model.dart # Weather data model
-│
-├── services/
-│ └── weather_service.dart # API service
-│
-├── views/
-│ ├── home_view.dart # Main home screen
-│ └── search_view.dart # Search city screen
-│
-├── widgets/
-│ ├── no_weather_body.dart # UI for initial state
-│ └── weather_info_body.dart # UI for loaded weather state
-│
-└── main.dart # App entry point + Theme
-
----
-
 🎨 Theming
 
 Background gradient changes from top color (based on weather condition) to white at the bottom.
