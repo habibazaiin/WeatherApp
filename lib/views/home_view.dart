@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/cubits/get_weather_cubit/get_weather_cubit.dart';
 import 'package:my_app/cubits/get_weather_cubit/get_weather_state.dart';
+import 'package:my_app/main.dart';
 import 'package:my_app/views/search_view.dart';
 import 'package:my_app/widgets/no_weather_body.dart';
 import 'package:my_app/widgets/weather_info_body.dart';
@@ -13,7 +14,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather App',),
+        title: Text('Weather App'),
         actions: [
           IconButton(
             onPressed: () {
@@ -31,12 +32,16 @@ class HomeView extends StatelessWidget {
       ),
       body: BlocBuilder<GetWeatherCubit, WeatherState>(
         builder: (context, state) {
-          if (state is WeatherInitialState) {
-            return const NoWeatherBody();
-          } else if (state is WeatherLoadedState) {
+          if (state is WeatherLoadingState) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is WeatherSuccessState) {
             return WeatherInfoBody();
+          } else if (state is WeatherFailureState) {
+            return Center(
+              child: Text('something went wrong, please try again'),
+            );
           } else {
-            return const Text('Oops there was an error, Try later');
+            return NoWeatherBody();
           }
         },
       ),

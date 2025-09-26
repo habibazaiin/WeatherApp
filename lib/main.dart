@@ -5,7 +5,9 @@ import 'package:my_app/views/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(WeatherApp());
+  runApp(
+    BlocProvider(create: (context) => GetWeatherCubit(), child: WeatherApp()),
+  );
 }
 
 class WeatherApp extends StatelessWidget {
@@ -13,34 +15,25 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetWeatherCubit(),
-      child: Builder(
-        builder: (context) => BlocBuilder<GetWeatherCubit, WeatherState>(
-          builder: (context, state) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: getColor(
-                  BlocProvider.of<GetWeatherCubit>(
-                    context,
-                  ).weatherModel?.condition,
-                ),
-                appBarTheme: AppBarTheme(
-                  backgroundColor: getColor(
-                    BlocProvider.of<GetWeatherCubit>(
-                      context,
-                    ).weatherModel?.condition,
-                  ),
-                  titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
+    return BlocBuilder<GetWeatherCubit, WeatherState>(
+      builder: (context, state) {
+        final condition = context
+            .read<GetWeatherCubit>()
+            .weatherModel
+            ?.condition;
 
-              home: HomeView(),
-            );
-          },
-        ),
-      ),
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: getColor(condition),
+            appBarTheme: AppBarTheme(
+              backgroundColor: getColor(condition),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+          home: HomeView(),
+        );
+      },
     );
   }
 }
